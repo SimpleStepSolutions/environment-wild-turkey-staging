@@ -1,4 +1,13 @@
 PipelineSecrets: {}
+global:
+  postgres:
+    enabled: false
+  # Custom values for Google Cloud SQL
+  cloudsql:
+    enabled: true
+    project: simple-step-project
+    region: northamerica-northeast1
+    instance: keycloak-pg-jx-staging        
 cleanup:
   Annotations:
     helm.sh/hook: pre-delete

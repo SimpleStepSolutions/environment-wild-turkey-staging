@@ -17,7 +17,7 @@ keycloak-http:
           command:
             - /cloud_sql_proxy
           args:
-            - -instances={{ .Values.global.cloudsql.project }}:{{ .Values.global.cloudsql.region }}:{{ .Values.global.cloudsql.instance }}=tcp:5432
+            - -instances=simple-step-project:northamerica-northeast1:keycloak-pg-jx-staging=tcp:5432
             - -credential_file=/secrets/cloudsql/credentials.json
           volumeMounts:
             - name: cloudsql-creds

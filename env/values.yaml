@@ -1,41 +1,4 @@
 PipelineSecrets: {}
-global:
-  postgres:
-    enabled: false
-  # Custom values for Google Cloud SQL
-  cloudsql:
-    enabled: true
-    project: simple-step-project
-    region: northamerica-northeast1
-    instance: keycloak-pg-jx-staging
-keycloak-http:
-  official-keycloak:
-    keycloak:
-      extraContainers: |
-        - name: cloudsql-proxy
-          image: gcr.io/cloudsql-docker/gce-proxy:1.11
-          command:
-            - /cloud_sql_proxy
-          args:
-            - -instances=simple-step-project:northamerica-northeast1:keycloak-pg-jx-staging=tcp:5432
-            - -credential_file=/secrets/cloudsql/credentials.json
-          volumeMounts:
-            - name: cloudsql-creds
-              mountPath: /secrets/cloudsql
-              readOnly: true
-      
-      extraVolumes: |
-        - name: theme
-          emptyDir: {}
-        - name: realm-secret
-          secret:
-            secretName: realm-secret
-        - name: cloudsql-creds
-          secret:
-            secretName: cloudsql-instance-credentials
-      
-      persistence:
-        dbHost: 127.0.0.1
 cleanup:
   Annotations:
     helm.sh/hook: pre-delete

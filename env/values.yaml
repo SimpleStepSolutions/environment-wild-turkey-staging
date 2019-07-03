@@ -14,7 +14,6 @@ keycloak-http:
             - name: cloudsql-creds
               mountPath: /secrets/cloudsql
               readOnly: true
-
       extraVolumes: |
         - name: theme
           emptyDir: {}
@@ -24,17 +23,17 @@ keycloak-http:
         - name: cloudsql-creds
           secret:
             secretName: cloudsql-instance-credentials
-
       extraVolumeMounts: |
         - name: theme
           mountPath: /opt/jboss/keycloak/standalone/deployments
         - name: realm-secret-volume
           mountPath: "/realm/"
           readOnly: true
-
       persistence:
         dbHost: 127.0.0.1
-
+keycloak:
+  cloudsql:
+    enabled: true  
 cleanup:
   Annotations:
     helm.sh/hook: pre-delete

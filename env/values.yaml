@@ -33,7 +33,7 @@ keycloak-http:
         dbHost: 127.0.0.1
 keycloak:
   cloudsql:
-    enabled: true  
+    disabled: false  
 cleanup:
   Annotations:
     helm.sh/hook: pre-delete

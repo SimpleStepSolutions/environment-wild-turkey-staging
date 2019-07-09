@@ -23,12 +23,6 @@ keycloak-http:
         - name: cloudsql-creds
           secret:
             secretName: cloudsql-instance-credentials
-      extraVolumeMounts: |
-        - name: theme
-          mountPath: /opt/jboss/keycloak/standalone/deployments
-        - name: realm-secret-volume
-          mountPath: "/realm/"
-          readOnly: true
       persistence:
         dbHost: 127.0.0.1
 keycloak:
